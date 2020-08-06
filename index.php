@@ -11,8 +11,8 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-include 'includes/db.php';
-include 'includes/connect.php';
+include __DIR__ . '/includes/db.php';
+include __DIR__ . '/includes/connect.php';
 ?>
 <!doctype html>
 <html>
@@ -199,7 +199,7 @@ include 'includes/connect.php';
                     </div>
                 <div class="row justify-content-center">
                     <div class="col-12">
-                        <h2 class="heading text-center"><img src="assets/boroda.png" width="80" height="80">Бородатый комментатор 0.1</h2>
+                        <h2 class="heading text-center"><img src="assets/boroda.png" width="80" height="80">Бородатый комментатор 0.2</h2>
                     </div>
                 </div>
                 <form class="form-card" name="MyForm" id="callbacks" action="comments.php" method="POST" enctype="multipart/form-data">
@@ -211,23 +211,32 @@ include 'includes/connect.php';
                     </div>
 
                     <div class="row justify-content-center">
-                        <div class="col-12">
-                            <div class="input-group"> <input type="text" id="fp_id" name="fp_id" placeholder="1030005938588" value=""> <label>Страница ID</label> </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="input-group col-md-6"> <input type="text" id="fp_id" name="fp_id" placeholder="1030005938588" value=""> <label>Страница ID</label></div>
+                                <div class="input-group col-md-6">  <input type="text" id="ad_id" name="ad_id" placeholder="8234992304992300" value="" required> <label>Объявление ID</label> </div>
+                            </div>
                         </div>
                     </div>
-
+<hr>
                     <div class="row justify-content-center">
                         <div class="col-12">
-                            <div class="input-group"> <input type="text" id="ad_id" name="ad_id" placeholder="8234992304992300" value="" required> <label>Объявление ID</label> </div>
-                        </div>
-                    </div>
+                            <div class="form-group input-group">
+                                <div class="input-group">
+                                    <label>Автор</label>
+                                    <select class="custom-select" name="author[]" >
+                                        <?php
+                                        $getAllAuthor = $db->query("SELECT * FROM author");
 
-                    <div class="row justify-content-center">
-                        <div class="col-12">
-                            <div class="input-group">
-                                <label>Текст комментария</label>
-                                <textarea id="message" name="message" placeholder="" value="" required></textarea>
+                                        foreach ($getAllAuthor as $item) {
+                                            echo "<option value='".$item['id']."'>".$item['name']."</option>" ;
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
 
+                                <textarea id="message" name="message[]" placeholder="Текст комментария" value="" required></textarea>
+                                <button type="button" class="btn btn-success btn-add">✚</button>
                             </div>
 
                         </div>
@@ -241,11 +250,33 @@ include 'includes/connect.php';
 
                 <div class="alert alert-success" role="alert" id="erconts" style = "display: none">
                 </div>
-
+                <center><a href="https://vk.com/bearded_cpa" target="_blank">Бородатый арбитраж</a> / <a href="http://hyperloopfb.com" target="_blank">Гиперлуб магазин аккаунтов ФБ</a></center>
             </div>
         </div>
     </div>
 
+    <script>
+        $(document).on('click', '.btn-add', function(event) {
+            event.preventDefault();
 
+            var field = $(this).closest('.form-group');
+            var field_new = field.clone();
+
+            $(this)
+                .toggleClass('btn-success')
+                .toggleClass('btn-add')
+                .toggleClass('btn-danger')
+                .toggleClass('btn-remove')
+                .html('✖');
+
+            field_new.find('input').val('');
+            field_new.insertAfter(field);
+        });
+
+        $(document).on('click', '.btn-remove', function(event) {
+            event.preventDefault();
+            $(this).closest('.form-group').remove();
+        });
+    </script>
 </body>
 </html>

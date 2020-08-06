@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:8889
--- Время создания: Июл 26 2020 г., 08:56
+-- Время создания: Авг 06 2020 г., 11:44
 -- Версия сервера: 5.7.25
 -- Версия PHP: 7.3.1
 
@@ -41,7 +41,8 @@ INSERT INTO `author` (`id`, `name`, `token`, `status`) VALUES
 (2, 'Я пирожок', 'EAAciaicnundunsudfuhusdhfuhushdfuhsudhfh', 1),
 (6, 'А я тестовый', 'EAAciaicnundunsudfuhusdhfuhushdfuhsudhfh', 0),
 (10, 'Я тут просто так', 'EAAciaicnundunsudfuhusdhfuhushdfuhsudhfh', 0),
-(17, 'Данные не получены', 'CMencuisncunuizdn', 0);
+(17, 'Данные не получены', 'CMencuisncunuizdn', 0),
+(22, 'Римма Иванова', 'EAABsbCS1iHgBANXgwMORLtVKNUFnkuv8K3PphoRL4lSsB386Aqed7uuvmymB9qjjpzVi2o3jPxP5AmZBUt5GDVXdWpPHWVejaSMuEch05L0njliaz5GBVI7mObKzeOGjbKUiulyFRBMRLyj0s2CBf2OZBbfdK7bZAiXQKlEP4mZCnhyZA3vWfnclqqZAzQnqAZD', 0);
 
 -- --------------------------------------------------------
 
@@ -85,7 +86,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT для таблицы `author`
 --
 ALTER TABLE `author`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT для таблицы `message`

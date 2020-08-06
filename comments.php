@@ -6,27 +6,40 @@
  * Time: 06:53
  */
 
-
-include 'includes/db.php';
-include 'includes/connect.php';
-include 'function/addComments.php';
+include __DIR__ . '/includes/db.php';
+include __DIR__ . '/includes/connect.php';
+include __DIR__ . '/function/addComments.php';
 
 if(isset($_POST['fp_id'])){
 
-        // Выбираем рандомного автора
-        $rand_author = $db->fetch('SELECT * FROM author WHERE status=\'0\' ORDER BY RAND() LIMIT 1');
+
+
+        // Считаем кол-во комментариев
+        $count = count($_POST['message']) - 1;
 
         // Получаем данные из формы
         $proxy = $_POST['proxy'];
         $fp_id =  $_POST['fp_id'];
         $ad_id =  $_POST['ad_id'];
-        $message =  $_POST['message'];
-        $token = $rand_author['token'];
-        $addComm = addComments($proxy, $fp_id, $ad_id, $message, $token, $curl); // публикуем комментарий
 
-        if(isset($addComm['id'])){
-            echo 'Комментарий добавлен: ' . $addComm['name'] . ' ' . $addComm['id'];
-        }else{
-           echo $addComm;
+
+        $count = count($_POST['message']) - 1;
+
+    for($i = 0; $i <= $count; $i++) {
+
+        // Выбираем автора
+        $author = $db->fetch('SELECT * FROM author WHERE id="'.$_POST['author'][$i].'"');
+        $token = $author['token'];
+
+        // Отправляемое сообщение
+        $message =  $_POST['message'][$i];
+
+
+        $addComm = addComments($proxy, $fp_id, $ad_id, $message, $token, $curl); // публикуем комментарий
+        if (isset($addComm['id'])) {
+            echo 'Комментарий добавлен: ' . $addComm['id'] . '<br>';
+        } else {
+            echo $addComm;
         }
+    }
 }

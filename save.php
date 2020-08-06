@@ -5,11 +5,13 @@
  * Date: 26.07.2020
  * Time: 04:39
  */
- ob_start();
+ob_start();
 
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
+
+
 
 include __DIR__ . '/includes/connect.php';
 include __DIR__ . '/includes/db.php';
@@ -22,7 +24,6 @@ $act = $_POST['act'];
 $act_get = $_GET['act'];
 $id = $_POST['id'];
 $id_get = $_GET['id'];
-
 
 if($cat == "author" || $cat_get == "author"){
     $token = mysqli_real_escape_string($link,$_POST["token"]);

@@ -11,9 +11,9 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-include 'includes/db.php';
-include 'includes/connect.php';
-include 'function/func.php';
+include __DIR__ . '/includes/db.php';
+include __DIR__ . '/includes/connect.php';
+include __DIR__ . '/function/func.php';
 ?>
 <!doctype html>
 <html>
@@ -343,6 +343,8 @@ include 'function/func.php';
             </div>
         </div>
     </div>
+    <center><a href="https://vk.com/bearded_cpa" target="_blank">Бородатый арбитраж</a> / <a href="http://hyperloopfb.com" target="_blank">Гиперлуб магазин аккаунтов ФБ</a></center>
+
 
 
 </body>
